@@ -3,8 +3,8 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
-const rateLimiter = require('./middlewares/rateLimiter');
-const authMiddleware = require('./middlewares/auth');
+const rateLimiter = require('./middleware/rateLimiter');
+const authMiddleware = require('./middleware/auth');
 const routes = require('./routes');
 const logger = require('./utils/logger');
 
