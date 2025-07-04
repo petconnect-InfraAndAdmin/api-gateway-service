@@ -18,18 +18,18 @@ app.use(express.json({ limit: '1mb' }));
 app.use(morgan('dev'));
 app.use(rateLimiter);
 
-// Rutas públicas (sin autenticación JWT)
-app.use('/api', routes.publicRoutes);
+// ✅ Rutas públicas (no requieren token)
+app.use('/api/v1', routes.publicRoutes);
 
-// Rutas privadas (protegidas con JWT)
-app.use('/api', authMiddleware, routes.privateRoutes);
+// ✅ Rutas privadas (requieren token JWT)
+app.use('/api/v1', authMiddleware, routes.privateRoutes);
 
-// Fallback 404
+// Fallback 404 para rutas no encontradas
 app.use((req, res) => {
   res.status(404).json({ error: 'Route not found in API Gateway' });
 });
 
-// Inicializar
+// Inicialización del servidor
 app.listen(PORT, () => {
-  logger.info(`🧩 PetConnect API Gateway running on the port ${PORT}`);
+  logger.info(`🧩 PetConnect API Gateway running on port ${PORT}`);
 });
