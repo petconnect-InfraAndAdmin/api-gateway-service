@@ -2,7 +2,7 @@ const express = require('express');
 const { PORT } = require('./config');
 const privateRoutes = require('./routes/private');
 const publicRoutes = require('./routes/public');
-const rateLimiter = require('./middleware/rateLimiter'); // Ajusté la ruta porque debe ser relativa a src
+const rateLimiter = require('../../middleware/rateLimiter'); // Ajusté la ruta porque debe ser relativa a src
 const logger = require('./utils/logger'); // Igual aquí
 
 const app = express();

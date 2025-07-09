@@ -1,6 +1,6 @@
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const rateLimiter = require('../middleware/rateLimiter'); // Opcional, si tienes un limitador de velocidad
+const rateLimiter = require('../../middleware/rateLimiter'); // Opcional, si tienes un limitador de velocidad
 const services = require('../servicesConfig');
 
 const router = express.Router();
