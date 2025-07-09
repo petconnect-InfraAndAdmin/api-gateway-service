@@ -1,6 +1,7 @@
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const authMiddleware = require('../middleware/auth');  // Ajusta la ruta si tu middleware está en otro lugar
+const authMiddleware = require('../../middleware/auth');
+
 const services = require('../servicesConfig');
 
 const router = express.Router();
