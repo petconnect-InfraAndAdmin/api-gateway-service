@@ -1,11 +1,11 @@
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const authMiddleware = require('../../middleware/auth');
-
 const services = require('../servicesConfig');
 
 const router = express.Router();
 
+// Rutas privadas que requieren autenticación
 const privateServices = [
   { prefix: '/api/v1/auth', target: services.AUTH_SERVICE },
   { prefix: '/api/user-profile', target: services.USER_PROFILE_SERVICE },
@@ -29,8 +29,7 @@ privateServices.forEach(({ prefix, target }) => {
     createProxyMiddleware({
       target,
       changeOrigin: true,
-      // Si quieres que los microservicios reciban la ruta sin el prefijo, descomenta esta línea:
-      // pathRewrite: (path) => path.replace(prefix, ''),
+      pathRewrite: (path, req) => path.replace(prefix, '')
     })
   );
 });
