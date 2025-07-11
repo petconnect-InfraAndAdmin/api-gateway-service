@@ -19,12 +19,11 @@ publicServices.forEach(({ prefix, target }) => {
     rateLimiter,
     createProxyMiddleware({
       target,
-      changeOrigin: true,  // ← aquí faltaba la coma
-      pathRewrite: {
-        [`^${prefix}`]: ''   // reescribe quitando el prefijo para el microservicio
-      }
+      changeOrigin: true,
+      pathRewrite: (path) => path.replace(prefix, '') // ✅ Elimina el prefijo al reenviar
     })
   );
 });
+
 
 module.exports = router;

@@ -1,20 +1,21 @@
-# Usa una imagen oficial de Node.js como base
-FROM node:18-alpine
+# Etapa 1: Builder para instalar dependencias necesarias
+FROM node:18-alpine AS builder
 
-# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia los package.json y package-lock.json para instalar dependencias
 COPY package*.json ./
 
-# Instala las dependencias
-RUN npm install --production
+RUN npm install --only=production
 
-# Copia el resto del código fuente
 COPY . .
 
-# Expone el puerto que usa la app (definido en config)
+# Etapa 2: Imagen final más limpia
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app /app
+
 EXPOSE 4000
 
-# Comando para iniciar la app
 CMD ["node", "src/server.js"]
