@@ -27,4 +27,3 @@ publicServices.forEach(({ prefix, target }) => {
 
 module.exports = router;
 
-module.exports = router;
