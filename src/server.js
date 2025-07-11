@@ -7,6 +7,9 @@ const logger = require('../utils/logger'); // Igual aquí
 
 const app = express();
 
+// Middleware para parsear JSON en requests
+app.use(express.json());
+
 // Middleware global: limitador de solicitudes para evitar abusos (ideal mantenerlo aquí)
 app.use(rateLimiter);
 

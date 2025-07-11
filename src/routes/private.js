@@ -29,7 +29,9 @@ privateServices.forEach(({ prefix, target }) => {
     createProxyMiddleware({
       target,
       changeOrigin: true,
-      pathRewrite: (path, req) => path.replace(prefix, '')
+      pathRewrite: {
+        [`^${prefix}`]: ''
+      }
     })
   );
 });
